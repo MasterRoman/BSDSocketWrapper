@@ -12,6 +12,14 @@ struct Socket {
     init(with endPoint:Int32) {
         self.endPoint = endPoint
     }
+    
+    init(addrInfo : addrinfo) throws {
+        let endPoint = Darwin.socket(addrInfo.ai_family, addrInfo.ai_socktype, addrInfo.ai_protocol)
+        guard endPoint != -1 else {
+            throw SocketError.creationFailed(errorCode: errno)
+        }
+        self.init(with: endPoint)
+    }
 }
 
 extension Socket{
@@ -58,8 +66,10 @@ extension Socket{
 
 //General
 extension Socket{
-    func bind(){
-        
+    func bind(to address:UnsafePointer<sockaddr>,sockLength:socklen_t) throws{
+        guard Darwin.bind(endPoint, address, sockLength) != -1 else {
+            throw SocketError.bindFailed(errorCode: errno)
+        }
     }
     
     
@@ -101,7 +111,10 @@ extension Socket{
 
 //Client
 extension Socket{
-    func connect(){
+    func connect(to address:UnsafePointer<sockaddr>,sockLength:socklen_t) throws{
+        guard Darwin.connect(endPoint, address, sockLength) != -1 else {
+            throw SocketError.connectFailed(errorCode: errno)
+        }
         
     }
 }
@@ -115,8 +128,15 @@ extension Socket{
         }
     }
     
-    func accept(){
+    func accept() throws -> Socket{
+        var sockAddress = sockaddr()
+        var sockLength : socklen_t = 0
+        let clientSocket = Darwin.accept(endPoint, &sockAddress, &sockLength)
+        guard clientSocket != -1 else {
+            throw SocketError.acceptFailed(errorCode: errno)
+        }
         
+        return Socket(with: clientSocket)
     }
 }
 
