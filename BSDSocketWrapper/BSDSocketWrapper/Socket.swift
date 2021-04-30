@@ -8,7 +8,9 @@
 import Foundation
 
 struct Socket {
-    init() {
+    let endPoint : Int32
+    init(with endPoint:Int32) {
+        self.endPoint = endPoint
     }
 }
 
@@ -38,7 +40,7 @@ extension Socket{
                 return "" + returnError(from: errorCode)
             case .receiveFailed(let errorCode):
                 return "" + returnError(from: errorCode)
-           
+                
             }
         }
         case creationFailed(errorCode : errno_t)
@@ -60,12 +62,40 @@ extension Socket{
         
     }
     
-    func shutDown(){
+    
+    func close() throws{
+        guard Darwin.close(endPoint) != -1 else {
+            throw SocketError.closeFailed(errorCode: errno)
+        }
         
     }
+}
+
+extension Socket{
     
-    func close(){
+    enum ShutDownState
+    {
+        case shutReceive
+        case shutSend
+        case shutBoth
         
+        func getState()->Int32{
+            switch self {
+            case .shutReceive:
+                return SHUT_RD
+            case .shutSend:
+                return SHUT_WR
+            case .shutBoth:
+                return SHUT_RDWR
+            }
+        }
+    }
+    
+    func shutDown(with state:ShutDownState) throws{
+        let state = state.getState()
+        guard Darwin.shutdown(endPoint,state) != -1 else {
+            throw SocketError.shutDownFailed(errorCode: errno)
+        }
     }
 }
 
@@ -78,8 +108,11 @@ extension Socket{
 
 //Server
 extension Socket{
-    func listen(){
-        
+    func listen(with backlog:Int32) throws{
+        guard Darwin.listen(endPoint, backlog) != -1 else
+        {
+            throw SocketError.listenFailed(errorCode: errno)
+        }
     }
     
     func accept(){
