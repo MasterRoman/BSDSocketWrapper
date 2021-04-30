@@ -10,6 +10,7 @@
 		84421FC2263C204100822ECA /* BSDSocketWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84421FB8263C204000822ECA /* BSDSocketWrapper.framework */; };
 		84421FC7263C204100822ECA /* BSDSocketWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84421FC6263C204100822ECA /* BSDSocketWrapperTests.swift */; };
 		84421FC9263C204100822ECA /* BSDSocketWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84421FBB263C204000822ECA /* BSDSocketWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84421FD9263C228600822ECA /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84421FD8263C228600822ECA /* Socket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		84421FC1263C204100822ECA /* BSDSocketWrapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BSDSocketWrapperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84421FC6263C204100822ECA /* BSDSocketWrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSDSocketWrapperTests.swift; sourceTree = "<group>"; };
 		84421FC8263C204100822ECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84421FD8263C228600822ECA /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				84421FBB263C204000822ECA /* BSDSocketWrapper.h */,
 				84421FBC263C204000822ECA /* Info.plist */,
+				84421FD8263C228600822ECA /* Socket.swift */,
 			);
 			path = BSDSocketWrapper;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				TargetAttributes = {
 					84421FB7263C204000822ECA = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 					84421FC0263C204100822ECA = {
 						CreatedOnToolsVersion = 12.4;
@@ -194,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84421FD9263C228600822ECA /* Socket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +346,7 @@
 		84421FCD263C204100822ECA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 383M7JA9BT;
@@ -358,6 +364,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.BSDSocketWrapper;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -366,6 +373,7 @@
 		84421FCE263C204100822ECA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 383M7JA9BT;
@@ -391,6 +399,7 @@
 		84421FD0263C204100822ECA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 383M7JA9BT;
 				INFOPLIST_FILE = BSDSocketWrapperTests/Info.plist;
@@ -409,6 +418,7 @@
 		84421FD1263C204100822ECA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 383M7JA9BT;
 				INFOPLIST_FILE = BSDSocketWrapperTests/Info.plist;
