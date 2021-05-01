@@ -135,7 +135,6 @@ extension Socket{
         guard clientSocket != -1 else {
             throw SocketError.acceptFailed(errorCode: errno)
         }
-        
         return Socket(with: clientSocket)
     }
 }
@@ -143,23 +142,45 @@ extension Socket{
 
 //TCP
 extension Socket{
-    func send(){
-        
+    func send(buffer : UnsafeBufferPointer<UInt8>,flags : Int32 = 0) throws -> Int{
+        let sendedBytes = Darwin.send(endPoint, buffer.baseAddress, buffer.count, flags)
+        guard sendedBytes != -1 else
+        {
+            throw SocketError.sendFailed(errorCode: errno)
+        }
+        return sendedBytes
     }
     
-    func receive(){
-        
+    func receive(buffer: UnsafeMutableBufferPointer<UInt8>, flags: Int32 = 0) throws -> Int{
+        let receivedBytes = Darwin.recv(endPoint, buffer.baseAddress, buffer.count, flags)
+        guard receivedBytes != -1 else
+        {
+            throw SocketError.receiveFailed(errorCode: errno)
+        }
+        return receivedBytes
     }
 }
 
 
 //UDP
 extension Socket{
-    func sendTo(){
+    func send(to address:UnsafePointer<sockaddr>,buffer: UnsafeMutableBufferPointer<UInt8>, flags: Int32 = 0,sockLength:socklen_t) throws -> Int{
+        let sendedBytes = sendto(endPoint, buffer.baseAddress, buffer.count, flags, address, sockLength)
+        guard sendedBytes != -1 else
+        {
+            throw SocketError.sendFailed(errorCode: errno)
+        }
+        return sendedBytes
         
     }
     
-    func receiveTo(){
+    func receive(from address:UnsafeMutablePointer<sockaddr>,buffer: UnsafeMutableBufferPointer<UInt8>, flags: Int32 = 0,sockLength:UnsafeMutablePointer<socklen_t>) throws -> Int{
+        let receivedBytes = Darwin.recvfrom(endPoint, buffer.baseAddress, buffer.count, flags, address,sockLength)
+        guard receivedBytes != -1 else
+        {
+            throw SocketError.receiveFailed(errorCode: errno)
+        }
+        return receivedBytes
         
     }
 }
