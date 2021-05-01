@@ -181,6 +181,5 @@ extension Socket{
             throw SocketError.receiveFailed(errorCode: errno)
         }
         return receivedBytes
-        
     }
 }
