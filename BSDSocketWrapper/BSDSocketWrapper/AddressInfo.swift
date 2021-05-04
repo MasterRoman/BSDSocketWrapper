@@ -14,14 +14,14 @@ struct AddressInfo {
         self.addressInfoPointer = addrInfoPointer
     }
     
-    init(host: String?, port: String?,family: Int32 = AF_UNSPEC, sockType: Int32 = SOCK_STREAM, flags: Int32 = AI_PASSIVE) throws {
-        var addrInfoPointer: UnsafeMutablePointer<addrinfo>? = nil
-        
+    init(host: String?, port: String?,family: AddressFamily = .unspecified, sockType: SockType = .stream, flags: Flags = .passive) throws {
+
         var hints = addrinfo();
-        hints.ai_family = family
-        hints.ai_socktype = sockType
-        hints.ai_flags = flags
+        hints.ai_family = family.rawValue
+        hints.ai_socktype = sockType.rawValue
+        hints.ai_flags = flags.rawValue
         
+        var addrInfoPointer: UnsafeMutablePointer<addrinfo>? = nil
         let result: Int32
         
         switch (host, port) {

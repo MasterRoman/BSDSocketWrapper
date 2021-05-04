@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84213E22264087AE00B6FCB2 /* AddressParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84213E21264087AE00B6FCB2 /* AddressParameters.swift */; };
 		84421FC2263C204100822ECA /* BSDSocketWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84421FB8263C204000822ECA /* BSDSocketWrapper.framework */; };
 		84421FC7263C204100822ECA /* BSDSocketWrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84421FC6263C204100822ECA /* BSDSocketWrapperTests.swift */; };
 		84421FC9263C204100822ECA /* BSDSocketWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84421FBB263C204000822ECA /* BSDSocketWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84213E21264087AE00B6FCB2 /* AddressParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressParameters.swift; sourceTree = "<group>"; };
 		84421FB8263C204000822ECA /* BSDSocketWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BSDSocketWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84421FBB263C204000822ECA /* BSDSocketWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSDSocketWrapper.h; sourceTree = "<group>"; };
 		84421FBC263C204000822ECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				84421FBC263C204000822ECA /* Info.plist */,
 				84421FD8263C228600822ECA /* Socket.swift */,
 				848B2837263D9D0A005D1E35 /* AddressInfo.swift */,
+				84213E21264087AE00B6FCB2 /* AddressParameters.swift */,
 			);
 			path = BSDSocketWrapper;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				848B2838263D9D0A005D1E35 /* AddressInfo.swift in Sources */,
+				84213E22264087AE00B6FCB2 /* AddressParameters.swift in Sources */,
 				84421FD9263C228600822ECA /* Socket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
