@@ -11,6 +11,7 @@ protocol BaseSocket {
     var socket : Socket {get}
 }
 
+
 extension BaseSocket{
     private func send(buffer : UnsafeBufferPointer<UInt8>) throws {
         let bytesToSend = buffer.count
@@ -30,7 +31,29 @@ extension BaseSocket{
 }
 
 extension BaseSocket{
-  
+    func receive(completionHandler:(String) -> ()) throws{
+        var output = String()
+        
+        let bufferSize = 1024
+        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+        pointer.initialize(repeating: 0, count: bufferSize)
+        
+        let buffer = UnsafeMutableBufferPointer(start: pointer, count: bufferSize)
+        
+        var recivedBytes = 0
+        repeat {
+            recivedBytes = try socket.receive(buffer: buffer)
+            buffer.baseAddress?.withMemoryRebound(to: String.self, capacity: bufferSize, { (stringPointer: UnsafeMutablePointer<String>) in
+                output.append(stringPointer.pointee)
+            })
+        } while recivedBytes > 0
+     
+           
+        
+        pointer.deinitialize(count: bufferSize)
+        pointer.deallocate()
+        completionHandler(output)
+    }
     
-
+    
 }
