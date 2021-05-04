@@ -142,6 +142,10 @@ extension Socket{
 
 //TCP
 extension Socket{
+    func send(pointer: UnsafePointer<UInt8>, count: Int, flags: Int32 = 0) throws -> Int {
+        return try send(buffer: UnsafeBufferPointer(start: pointer, count: count), flags: flags)
+    }
+    
     func send(buffer : UnsafeBufferPointer<UInt8>,flags : Int32 = 0) throws -> Int{
         let sendedBytes = Darwin.send(endPoint, buffer.baseAddress, buffer.count, flags)
         guard sendedBytes != -1 else
