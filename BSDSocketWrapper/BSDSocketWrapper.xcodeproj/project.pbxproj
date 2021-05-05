@@ -14,6 +14,7 @@
 		84421FC9263C204100822ECA /* BSDSocketWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84421FBB263C204000822ECA /* BSDSocketWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84421FD9263C228600822ECA /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84421FD8263C228600822ECA /* Socket.swift */; };
 		8443589726432E3D009CE861 /* ServerSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8443589626432E3D009CE861 /* ServerSocket.swift */; };
+		8443589B26434A6D009CE861 /* ClientSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8443589A26434A6D009CE861 /* ClientSocket.swift */; };
 		847D8EEF264292740082FFF5 /* SocketAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D8EEE264292740082FFF5 /* SocketAddress.swift */; };
 		848B2838263D9D0A005D1E35 /* AddressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B2837263D9D0A005D1E35 /* AddressInfo.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 		84421FC8263C204100822ECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84421FD8263C228600822ECA /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		8443589626432E3D009CE861 /* ServerSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSocket.swift; sourceTree = "<group>"; };
+		8443589A26434A6D009CE861 /* ClientSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSocket.swift; sourceTree = "<group>"; };
 		847D8EEE264292740082FFF5 /* SocketAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAddress.swift; sourceTree = "<group>"; };
 		848B2837263D9D0A005D1E35 /* AddressInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 				847D8EEE264292740082FFF5 /* SocketAddress.swift */,
 				8425999A26415B07005507F4 /* BaseSocket.swift */,
 				8443589626432E3D009CE861 /* ServerSocket.swift */,
+				8443589A26434A6D009CE861 /* ClientSocket.swift */,
 			);
 			path = BSDSocketWrapper;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				848B2838263D9D0A005D1E35 /* AddressInfo.swift in Sources */,
+				8443589B26434A6D009CE861 /* ClientSocket.swift in Sources */,
 				8443589726432E3D009CE861 /* ServerSocket.swift in Sources */,
 				84213E22264087AE00B6FCB2 /* AddressParameters.swift in Sources */,
 				8425999B26415B07005507F4 /* BaseSocket.swift in Sources */,
