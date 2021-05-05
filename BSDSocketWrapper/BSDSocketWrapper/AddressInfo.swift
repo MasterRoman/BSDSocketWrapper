@@ -65,3 +65,9 @@ extension AddressInfo{
         case incorrectInitialization
     }
 }
+
+extension AddressInfo{
+    func getAddressInfo<T>(params : (addrinfo) throws -> T) rethrows -> T where T : BaseSocket{
+        return try params(self.addressInfoPointer.pointee)
+    }
+}
