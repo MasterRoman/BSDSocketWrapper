@@ -86,8 +86,8 @@
 				84421FD8263C228600822ECA /* Socket.swift */,
 				848B2837263D9D0A005D1E35 /* AddressInfo.swift */,
 				84213E21264087AE00B6FCB2 /* AddressParameters.swift */,
-				8425999A26415B07005507F4 /* BaseSocket.swift */,
 				847D8EEE264292740082FFF5 /* SocketAddress.swift */,
+				8425999A26415B07005507F4 /* BaseSocket.swift */,
 			);
 			path = BSDSocketWrapper;
 			sourceTree = "<group>";

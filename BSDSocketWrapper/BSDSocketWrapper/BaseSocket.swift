@@ -79,3 +79,13 @@ extension BaseSocket{
         try socket.close()
     }
 }
+
+extension BaseSocket{
+    func bind() throws{
+        try address.getAddress(params: { address,length in
+            try socket.bind(to:address, sockLength: length)
+        })
+        
+    }
+    
+}
