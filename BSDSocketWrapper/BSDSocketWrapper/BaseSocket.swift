@@ -9,14 +9,16 @@ import Foundation
 
 protocol BaseSocket {
     var socket : Socket {get}
+    var address : SockAddress {get}
     
-    init(socket : Socket) throws
+    init(socket : Socket,address : SockAddress) throws
 }
 
 extension BaseSocket{
     init(addrInfo: addrinfo) throws{
         let socket = try Socket(addrInfo: addrInfo)
-        try self.init(socket: socket)
+        let address = SockAddress(from: addrInfo)
+        try self.init(socket: socket, address: address)
     }
 }
 
