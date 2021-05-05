@@ -34,6 +34,29 @@ extension SockAddress{
             self = .empty
         }
     }
+    
+    init(from sockAddr : sockaddr) {
+        switch Int32(sockAddr.sa_family) {
+        case AF_INET:
+            let address = withUnsafePointer(to: sockAddr, { pointer in
+                pointer.withMemoryRebound(to: sockaddr_in.self, capacity: 1, { addrPointer in
+                    return addrPointer.pointee
+                })
+            })
+            self = .IPv4(address: address)
+        case AF_INET6:
+            let address = withUnsafePointer(to: sockAddr, { pointer in
+                pointer.withMemoryRebound(to: sockaddr_in6.self, capacity: 1, { addrPointer in
+                    return addrPointer.pointee
+                })
+            })
+            self = .IPv6(address:address)
+            
+        default:
+            self = .empty
+        }
+    }
+
 }
 
 extension SockAddress{
