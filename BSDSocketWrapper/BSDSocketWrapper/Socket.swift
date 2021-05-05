@@ -83,27 +83,16 @@ extension Socket{
 
 extension Socket{
     
-    enum ShutDownState
+    enum ShutDownState : Int32
     {
-        case shutReceive
-        case shutSend
-        case shutBoth
+        case shutReceive = 0 //SHUT_RD
+        case shutSend    = 1 //SHUT_WR
+        case shutBoth    = 2 //SHUT_RDWR
         
-        func getState()->Int32{
-            switch self {
-            case .shutReceive:
-                return SHUT_RD
-            case .shutSend:
-                return SHUT_WR
-            case .shutBoth:
-                return SHUT_RDWR
-            }
-        }
     }
     
     func shutDown(with state:ShutDownState) throws{
-        let state = state.getState()
-        guard Darwin.shutdown(endPoint,state) != -1 else {
+        guard Darwin.shutdown(endPoint,state.rawValue) != -1 else {
             throw SocketError.shutDownFailed(errorCode: errno)
         }
     }

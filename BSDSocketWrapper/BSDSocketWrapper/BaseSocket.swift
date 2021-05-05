@@ -9,6 +9,15 @@ import Foundation
 
 protocol BaseSocket {
     var socket : Socket {get}
+    
+    init(socket : Socket) throws
+}
+
+extension BaseSocket{
+    init(addrInfo: addrinfo) throws{
+        let socket = try Socket(addrInfo: addrInfo)
+        try self.init(socket: socket)
+    }
 }
 
 
@@ -56,4 +65,15 @@ extension BaseSocket{
     }
     
     
+}
+
+extension BaseSocket{
+    
+    func shutdown(with state: Socket.ShutDownState) throws{
+        try socket.shutDown(with: state)
+    }
+    
+    func close() throws{
+        try socket.close()
+    }
 }
