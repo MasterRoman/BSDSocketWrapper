@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct AddressInfo {
+class AddressInfo {
     private var addressInfoPointer : UnsafeMutablePointer<addrinfo>
     
     init(addrInfoPointer : UnsafeMutablePointer<addrinfo>) {
         self.addressInfoPointer = addrInfoPointer
     }
     
-    init(host: String?, port: String?,family: AddressFamily = .unspecified, sockType: SockType = .stream, flags: Flags = .passive) throws {
+    init(host: String?, port: String?,family: AddressFamily = .IPv4, sockType: SockType = .stream, flags: Flags = .passive) throws {
 
         var hints = addrinfo();
         hints.ai_family = family.rawValue
@@ -40,6 +40,10 @@ struct AddressInfo {
         }
       
         self.addressInfoPointer = addrInfoPointer!
+    }
+    
+    deinit {
+        freeaddrinfo(self.addressInfoPointer)
     }
 }
 
