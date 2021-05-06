@@ -39,6 +39,15 @@ extension BaseSocket{
             try send(buffer: $0)
         })
     }
+    
+    func send(data : Data) throws{
+        try data.withUnsafeBytes({ pointer in
+            let typedPointer = pointer.bindMemory(to: UInt8.self)
+            let buffer = UnsafeBufferPointer<UInt8>(start: typedPointer.baseAddress!, count: typedPointer.count)
+            try send(buffer: buffer)
+        })
+    }
+    
 }
 
 extension BaseSocket{
@@ -60,12 +69,12 @@ extension BaseSocket{
             let string = String(cString: buffer.baseAddress!)
             output.append(string)
         } while true
-     
-           
+        
+        
         completionHandler(output)
         pointer.deinitialize(count: bufferSize)
         pointer.deallocate()
-    
+        
     }
     
     
