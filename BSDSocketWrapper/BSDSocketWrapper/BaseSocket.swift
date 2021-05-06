@@ -54,16 +54,18 @@ extension BaseSocket{
         var recivedBytes = 0
         repeat {
             recivedBytes = try socket.receive(buffer: buffer)
-            buffer.baseAddress?.withMemoryRebound(to: String.self, capacity: bufferSize, { (stringPointer: UnsafeMutablePointer<String>) in
-                output.append(stringPointer.pointee)
-            })
-        } while recivedBytes > 0
+            guard recivedBytes != 0 else {
+                break
+            }
+            let string = String(cString: buffer.baseAddress!)
+            output.append(string)
+        } while true
      
            
-        
+        completionHandler(output)
         pointer.deinitialize(count: bufferSize)
         pointer.deallocate()
-        completionHandler(output)
+    
     }
     
     
