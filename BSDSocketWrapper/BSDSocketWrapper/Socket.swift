@@ -119,7 +119,8 @@ extension Socket{
     
     func accept() throws -> (Socket,SockAddress){
         var sockAddress = sockaddr()
-        var sockLength : socklen_t = 0
+        let addrStorage = sockaddr_storage()
+        var sockLength : socklen_t = socklen_t(MemoryLayout.size(ofValue: addrStorage))
         let clientSocket = Darwin.accept(endPoint, &sockAddress, &sockLength)
         guard clientSocket != -1 else {
             throw SocketError.acceptFailed(errorCode: errno)
