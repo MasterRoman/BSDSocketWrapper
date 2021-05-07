@@ -159,7 +159,11 @@ extension Socket{
 
 //UDP
 extension Socket{
-    func send(to address:UnsafePointer<sockaddr>,buffer: UnsafeMutableBufferPointer<UInt8>, flags: Int32 = 0,sockLength:socklen_t) throws -> Int{
+    func send(to address:UnsafePointer<sockaddr>,pointer: UnsafePointer<UInt8>, count: Int, flags: Int32 = 0,sockLength:socklen_t) throws -> Int {
+        return try send(to: address, buffer: UnsafeBufferPointer(start: pointer, count: count), flags: flags, sockLength: sockLength)
+    }
+    
+    func send(to address:UnsafePointer<sockaddr>,buffer: UnsafeBufferPointer<UInt8>, flags: Int32 = 0,sockLength:socklen_t) throws -> Int{
         let sendedBytes = sendto(endPoint, buffer.baseAddress, buffer.count, flags, address, sockLength)
         guard sendedBytes != -1 else
         {
