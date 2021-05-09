@@ -14,7 +14,7 @@ class AddressInfo {
         self.addressInfoPointer = addrInfoPointer
     }
     
-    init(host: String?, port: String?,family: AddressFamily = .IPv4, sockType: SockType = .stream, flags: Flags = .passive) throws {
+    init(host: String?, port: String?,family: AddressFamily = .IPv4, sockType: SockType, flags: Flags = .passive) throws {
 
         var hints = addrinfo();
         hints.ai_family = family.rawValue
@@ -56,12 +56,10 @@ extension AddressInfo{
                 return String(utf8String: strerror(code)) ?? "unknown"
             }
             switch self {
-            
             case .getAddrInfoFailed(let errorCode):
                 return "" + returnError(from: errorCode)
             case .incorrectInitialization:
                 return "Either port or address must be set"
-                
             }
         }
         

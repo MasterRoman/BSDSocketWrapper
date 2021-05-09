@@ -96,7 +96,6 @@ extension SockAddress{
         case .IPv4(var address,var length):
             var addr = getMutableSockAddress(address: &address)
             try params(&addr,&length)
-            
         case .IPv6(var address,var length):
             var addr = getMutableSockAddress(address: &address)
             try params(&addr,&length)

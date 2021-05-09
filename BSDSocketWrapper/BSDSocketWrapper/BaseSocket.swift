@@ -9,7 +9,7 @@ import Foundation
 
 protocol BaseSocket {
     var socket : Socket {get}
-    var address : SockAddress {get}
+    var address : SockAddress {get set}
     
     init(socket : Socket,address : SockAddress) throws
 }
@@ -60,6 +60,12 @@ extension BaseSocket{
         
         let buffer = UnsafeMutableBufferPointer(start: pointer, count: bufferSize)
         
+        defer {
+            completionHandler(output)
+            pointer.deinitialize(count: bufferSize)
+            pointer.deallocate()
+        }
+        
         var recivedBytes = 0
         repeat {
             recivedBytes = try socket.receive(buffer: buffer)
@@ -70,10 +76,6 @@ extension BaseSocket{
             output.append(string)
         } while true
         
-        
-        completionHandler(output)
-        pointer.deinitialize(count: bufferSize)
-        pointer.deallocate()
         
     }
 }
@@ -88,7 +90,6 @@ extension BaseSocket{
             try address.getAddress { (address, length) in
                 sentBytes += try socket.send(to: address, pointer: buffer.baseAddress! + sentBytes, count: buffer.count - sentBytes, sockLength: length)
             }
-            
         }
     }
     
@@ -109,19 +110,30 @@ extension BaseSocket{
 }
 
 extension BaseSocket{
-    func receiveFrom(completionHandler:(String) -> ()) throws{
+    mutating func receiveFrom(with timeout : Int,completionHandler:(String) -> ()) throws{
         var output = String()
         
         let bufferSize = 1024
         let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
         pointer.initialize(repeating: 0, count: bufferSize)
         
+        defer {
+            
+            completionHandler(output)
+            pointer.deinitialize(count: bufferSize)
+            pointer.deallocate()
+        }
+        
         let buffer = UnsafeMutableBufferPointer(start: pointer, count: bufferSize)
         
+        
+        var recivedBytes = 0
         try address.getMutableAddress { (address,length) in
-            var recivedBytes = 0
+            defer {
+                self.address = SockAddress(from: address.pointee)
+            }
             repeat {
-                recivedBytes = try socket.receive(from: address, buffer: buffer, sockLength:length)
+                recivedBytes = try socket.receive(from: address, buffer: buffer, sockLength:length, timeout: timeout)
                 guard recivedBytes != 0 else {
                     break
                 }
@@ -130,11 +142,6 @@ extension BaseSocket{
             } while true
             
         }
-        
-        
-        completionHandler(output)
-        pointer.deinitialize(count: bufferSize)
-        pointer.deallocate()
     }
 }
 

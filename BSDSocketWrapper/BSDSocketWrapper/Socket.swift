@@ -164,7 +164,7 @@ extension Socket{
     }
     
     func send(to address:UnsafePointer<sockaddr>,buffer: UnsafeBufferPointer<UInt8>, flags: Int32 = 0,sockLength:socklen_t) throws -> Int{
-        let sendedBytes = sendto(endPoint, buffer.baseAddress, buffer.count, flags, address, sockLength)
+        let sendedBytes = Darwin.sendto(endPoint, buffer.baseAddress, buffer.count, flags, address, sockLength)
         guard sendedBytes != -1 else
         {
             throw SocketError.sendFailed(errorCode: errno)
@@ -173,7 +173,10 @@ extension Socket{
         
     }
     
-    func receive(from address:UnsafeMutablePointer<sockaddr>,buffer: UnsafeMutableBufferPointer<UInt8>, flags: Int32 = 0,sockLength:UnsafeMutablePointer<socklen_t>) throws -> Int{
+    func receive(from address:UnsafeMutablePointer<sockaddr>,buffer: UnsafeMutableBufferPointer<UInt8>, flags: Int32 = 0,sockLength:UnsafeMutablePointer<socklen_t>,timeout : Int) throws -> Int{
+        var tv = timeval(tv_sec: timeout, tv_usec: 0);
+
+        setsockopt(endPoint, SOL_SOCKET, SO_RCVTIMEO, &tv, sockLength.pointee)
         let receivedBytes = Darwin.recvfrom(endPoint, buffer.baseAddress, buffer.count, flags, address,sockLength)
         guard receivedBytes != -1 else
         {

@@ -11,8 +11,8 @@ protocol ClientSocket : BaseSocket {
 }
 
 extension ClientSocket{
-    init(host:String,port: String) throws {
-        self = try AddressInfo(host: host, port: port).getAddressInfo(params: { addrInfo in
+    init(host:String,port: String, sockType: SockType) throws {
+        self = try AddressInfo(host: host, port: port, sockType: sockType).getAddressInfo(params: { addrInfo in
             return try Self.init(addrInfo: addrInfo)
         })
     }

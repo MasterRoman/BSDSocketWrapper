@@ -11,8 +11,8 @@ protocol ServerSocket : BaseSocket {
 }
 
 extension ServerSocket{
-    init(port: String) throws {
-        self = try AddressInfo(host: nil, port: port).getAddressInfo(params: { addrInfo in
+    init(port: String, sockType: SockType) throws {
+        self = try AddressInfo(host: nil, port: port, sockType: sockType).getAddressInfo(params: { addrInfo in
             return try Self.init(addrInfo: addrInfo)
         })
     }
