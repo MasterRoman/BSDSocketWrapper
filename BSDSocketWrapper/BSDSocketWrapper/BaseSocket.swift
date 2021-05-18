@@ -34,6 +34,7 @@ extension BaseSocket{
     }
     
     func send(message : String) throws{
+        try sendLength(message)
         var tempMessage = message
         try tempMessage.withUTF8({
             try send(buffer: $0)
@@ -41,6 +42,7 @@ extension BaseSocket{
     }
     
     func send(data : Data) throws{
+        try sendLength(data)
         try data.withUnsafeBytes({ pointer in
             let typedPointer = pointer.bindMemory(to: UInt8.self)
             let buffer = UnsafeBufferPointer<UInt8>(start: typedPointer.baseAddress!, count: typedPointer.count)
@@ -48,9 +50,47 @@ extension BaseSocket{
         })
     }
     
+    private func sendLength<T>(_ parameter : T) throws where T : Collection {
+        var dataLength = parameter.count
+        
+        try withUnsafeBytes(of: &dataLength, {pointer in
+            let buffer = pointer.bindMemory(to: UInt8.self)
+            try send(buffer: buffer)
+        })
+      
+      
+    }
+    
 }
 
 extension BaseSocket{
+    
+    private func receiveLength() throws -> Int{
+        let bufferSize = 8
+        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+        pointer.initialize(repeating: 0, count: bufferSize)
+        
+        let buffer = UnsafeMutableBufferPointer(start: pointer, count: bufferSize)
+        defer {
+            pointer.deinitialize(count: bufferSize)
+            pointer.deallocate()
+        }
+        
+        let recivedBytes = try socket.receive(buffer: buffer)
+        guard recivedBytes != 0 else {
+            return 0
+        }
+        
+        var length = Int()
+        var curInt = 0
+        for (index,byte) in buffer.enumerated() {
+            curInt = Int(byte) << (index * 4)
+            length += curInt
+        }
+
+        return length
+    }
+    
     func receive(completionHandler:(String) -> ()) throws{
         var output = String()
         
@@ -59,22 +99,26 @@ extension BaseSocket{
         pointer.initialize(repeating: 0, count: bufferSize)
         
         let buffer = UnsafeMutableBufferPointer(start: pointer, count: bufferSize)
-        
         defer {
             completionHandler(output)
             pointer.deinitialize(count: bufferSize)
             pointer.deallocate()
         }
         
-        var recivedBytes = 0
+        
+        var receivedBytes = 0
+        var receivedCount = 0
+        let lengthOfData = try receiveLength()
+        
         repeat {
-            recivedBytes = try socket.receive(buffer: buffer)
-            guard recivedBytes != 0 else {
+            receivedBytes = try socket.receive(buffer: buffer)
+            guard receivedBytes != 0 else {
                 break
             }
+            receivedCount += receivedBytes
             let string = String(cString: buffer.baseAddress!)
             output.append(string)
-        } while true
+        } while receivedCount < lengthOfData
         
         
     }
