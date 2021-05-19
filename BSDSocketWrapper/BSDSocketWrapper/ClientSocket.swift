@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol ClientSocket : BaseSocket {
+public protocol ClientSocket : BaseSocket {
 }
 
-extension ClientSocket{
+public extension ClientSocket{
     init(host:String,port: String, sockType: SockType) throws {
         self = try AddressInfo(host: host, port: port, sockType: sockType).getAddressInfo(params: { addrInfo in
             return try Self.init(addrInfo: addrInfo)
@@ -18,8 +18,8 @@ extension ClientSocket{
     }
 }
 
-extension ClientSocket{
-    public func connect() throws{
+public extension ClientSocket{
+    func connect() throws{
         try address.getAddress(params: { sockAddr,length in
             try socket.connect(to: sockAddr, sockLength: length)
         })
@@ -32,7 +32,7 @@ open class ClientEndpoint : ClientSocket{
         self.address = address
     }
     
-    var socket: Socket
+    public var socket: Socket
     
-    var address: SockAddress
+    public var address: SockAddress
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BaseSocket {
+public protocol BaseSocket {
     var socket : Socket {get}
     var address : SockAddress {get set}
     
@@ -23,7 +23,7 @@ extension BaseSocket{
 }
 
 
-extension BaseSocket{
+public extension BaseSocket{
     private func send(buffer : UnsafeBufferPointer<UInt8>) throws {
         let bytesToSend = buffer.count
         var sentBytes = 0
@@ -33,7 +33,7 @@ extension BaseSocket{
         }
     }
     
-    public func send(message : String) throws{
+    func send(message : String) throws{
         try sendLength(message)
         var tempMessage = message
         try tempMessage.withUTF8({
@@ -41,7 +41,7 @@ extension BaseSocket{
         })
     }
     
-    public func send(data : Data) throws{
+    func send(data : Data) throws{
         try sendLength(data)
         try data.withUnsafeBytes({ pointer in
             let typedPointer = pointer.bindMemory(to: UInt8.self)
@@ -63,7 +63,7 @@ extension BaseSocket{
     
 }
 
-extension BaseSocket{
+public extension BaseSocket{
     
     private func receiveLength() throws -> Int{
         let bufferSize = 8
@@ -92,7 +92,7 @@ extension BaseSocket{
     }
     
     
-    public func receive(completionHandler:(String) -> ()) throws{
+    func receive(completionHandler:(String) -> ()) throws{
         var output = String()
         
         let bufferSize = 1024
@@ -124,7 +124,7 @@ extension BaseSocket{
         
     }
     
-    public func receive(_ completionHandler:(Data) -> ()) throws{
+    func receive(_ completionHandler:(Data) -> ()) throws{
         var output = Data()
         
         let bufferSize = 1024
@@ -159,7 +159,7 @@ extension BaseSocket{
 
 
 //for UDP
-extension BaseSocket{
+public extension BaseSocket{
     private func sendTo(buffer : UnsafeBufferPointer<UInt8>) throws {
         let bytesToSend = buffer.count
         var sentBytes = 0
@@ -170,14 +170,14 @@ extension BaseSocket{
         }
     }
     
-    public func sendTo(message : String) throws{
+    func sendTo(message : String) throws{
         var tempMessage = message
         try tempMessage.withUTF8({
             try sendTo(buffer: $0)
         })
     }
     
-    public func sendTo(data : Data) throws{
+    func sendTo(data : Data) throws{
         try data.withUnsafeBytes({ pointer in
             let typedPointer = pointer.bindMemory(to: UInt8.self)
             let buffer = UnsafeBufferPointer<UInt8>(start: typedPointer.baseAddress!, count: typedPointer.count)
@@ -186,8 +186,8 @@ extension BaseSocket{
     }
 }
 
-extension BaseSocket{
-    public mutating func receiveFrom(with timeout : Int,completionHandler:(String) -> ()) throws{
+public extension BaseSocket{
+    mutating func receiveFrom(with timeout : Int,completionHandler:(String) -> ()) throws{
         var output = String()
         
         let bufferSize = 1024
@@ -222,19 +222,19 @@ extension BaseSocket{
     }
 }
 
-extension BaseSocket{
+public extension BaseSocket{
     
-    public func shutdown(with state: Socket.ShutDownState) throws{
+    func shutdown(with state: Socket.ShutDownState) throws{
         try socket.shutDown(with: state)
     }
     
-    public func close() throws{
+    func close() throws{
         try socket.close()
     }
 }
 
-extension BaseSocket{
-    public func bind() throws{
+public extension BaseSocket{
+    func bind() throws{
         try address.getAddress(params: { address,length in
             try socket.bind(to:address, sockLength: length)
         })

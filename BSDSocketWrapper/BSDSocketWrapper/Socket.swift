@@ -83,7 +83,7 @@ extension Socket{
 
 extension Socket{
     
-    enum ShutDownState : Int32
+    public enum ShutDownState : Int32
     {
         case shutReceive = 0 //SHUT_RD
         case shutSend    = 1 //SHUT_WR

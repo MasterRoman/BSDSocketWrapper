@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AddressFamily : Int32{
+public enum AddressFamily : Int32{
     
     case unspecified = 0  //AF_UNSPEC
     case IPv4 = 2 //AF_INET
@@ -25,12 +25,12 @@ enum AddressFamily : Int32{
     }
 }
 
-enum SockType : Int32 {
+public enum SockType : Int32 {
     case stream = 1    //SOCK_STREAM
     case datagram = 2  //SOCK_DGRAM
 }
 
-enum Flags : Int32{
+public enum Flags : Int32{
     case passive = 1 //AI_PASSIVE get address to use bind()
     case `default` = 1536 //AI_DEFAULT
 }

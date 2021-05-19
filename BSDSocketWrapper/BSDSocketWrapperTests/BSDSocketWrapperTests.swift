@@ -8,32 +8,6 @@
 import XCTest
 @testable import BSDSocketWrapper
 
-class S: ServerSocket{
-    required init(socket: Socket, address: SockAddress) throws {
-        self.socket = socket
-        self.address = address
-    }
-    
-    var socket: Socket
-    
-    var address: SockAddress
-    
-    
-    
-}
-
-class C: ClientSocket{
-    required init(socket: Socket, address: SockAddress) throws {
-        self.socket = socket
-        self.address = address
-    }
-    
-    var socket: Socket
-    
-    var address: SockAddress
-    
-}
-
 class BSDSocketWrapperTests: XCTestCase {
     
     override func setUpWithError() throws {
