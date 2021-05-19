@@ -84,7 +84,7 @@ extension BaseSocket{
         var length = Int()
         var curInt = 0
         for (index,byte) in buffer.enumerated() {
-            curInt = Int(byte) << (index * 4)
+            curInt = Int(byte) << (index * 8)
             length += curInt
         }
 
