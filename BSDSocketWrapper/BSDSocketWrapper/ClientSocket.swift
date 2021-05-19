@@ -19,9 +19,20 @@ extension ClientSocket{
 }
 
 extension ClientSocket{
-    func connect() throws{
+    public func connect() throws{
         try address.getAddress(params: { sockAddr,length in
             try socket.connect(to: sockAddr, sockLength: length)
         })
     }
+}
+
+open class ClientEndpoint : ClientSocket{
+    required public init(socket: Socket, address: SockAddress) throws {
+        self.socket = socket
+        self.address = address
+    }
+    
+    var socket: Socket
+    
+    var address: SockAddress
 }

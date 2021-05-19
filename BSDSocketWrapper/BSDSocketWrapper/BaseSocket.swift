@@ -33,7 +33,7 @@ extension BaseSocket{
         }
     }
     
-    func send(message : String) throws{
+    public func send(message : String) throws{
         try sendLength(message)
         var tempMessage = message
         try tempMessage.withUTF8({
@@ -41,7 +41,7 @@ extension BaseSocket{
         })
     }
     
-    func send(data : Data) throws{
+    public func send(data : Data) throws{
         try sendLength(data)
         try data.withUnsafeBytes({ pointer in
             let typedPointer = pointer.bindMemory(to: UInt8.self)
@@ -92,7 +92,7 @@ extension BaseSocket{
     }
     
     
-    func receive(completionHandler:(String) -> ()) throws{
+    public func receive(completionHandler:(String) -> ()) throws{
         var output = String()
         
         let bufferSize = 1024
@@ -124,7 +124,7 @@ extension BaseSocket{
         
     }
     
-    func receive(_ completionHandler:(Data) -> ()) throws{
+    public func receive(_ completionHandler:(Data) -> ()) throws{
         var output = Data()
         
         let bufferSize = 1024
@@ -170,14 +170,14 @@ extension BaseSocket{
         }
     }
     
-    func sendTo(message : String) throws{
+    public func sendTo(message : String) throws{
         var tempMessage = message
         try tempMessage.withUTF8({
             try sendTo(buffer: $0)
         })
     }
     
-    func sendTo(data : Data) throws{
+    public func sendTo(data : Data) throws{
         try data.withUnsafeBytes({ pointer in
             let typedPointer = pointer.bindMemory(to: UInt8.self)
             let buffer = UnsafeBufferPointer<UInt8>(start: typedPointer.baseAddress!, count: typedPointer.count)
@@ -187,7 +187,7 @@ extension BaseSocket{
 }
 
 extension BaseSocket{
-    mutating func receiveFrom(with timeout : Int,completionHandler:(String) -> ()) throws{
+    public mutating func receiveFrom(with timeout : Int,completionHandler:(String) -> ()) throws{
         var output = String()
         
         let bufferSize = 1024
@@ -224,17 +224,17 @@ extension BaseSocket{
 
 extension BaseSocket{
     
-    func shutdown(with state: Socket.ShutDownState) throws{
+    public func shutdown(with state: Socket.ShutDownState) throws{
         try socket.shutDown(with: state)
     }
     
-    func close() throws{
+    public func close() throws{
         try socket.close()
     }
 }
 
 extension BaseSocket{
-    func bind() throws{
+    public func bind() throws{
         try address.getAddress(params: { address,length in
             try socket.bind(to:address, sockLength: length)
         })

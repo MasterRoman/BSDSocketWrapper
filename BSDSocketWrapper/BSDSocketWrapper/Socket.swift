@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Socket {
+public struct Socket {
     let endPoint : Int32
     init(with endPoint:Int32) {
         self.endPoint = endPoint

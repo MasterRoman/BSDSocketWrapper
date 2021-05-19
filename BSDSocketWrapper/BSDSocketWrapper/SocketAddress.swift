@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SockAddress{
+public enum SockAddress{
     case IPv4(address : sockaddr_in,length : socklen_t)
     case IPv6(address : sockaddr_in6,length : socklen_t)
     case empty
