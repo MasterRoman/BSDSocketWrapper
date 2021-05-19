@@ -91,6 +91,7 @@ extension BaseSocket{
         return length
     }
     
+    
     func receive(completionHandler:(String) -> ()) throws{
         var output = String()
         
@@ -118,6 +119,38 @@ extension BaseSocket{
             receivedCount += receivedBytes
             let string = String(cString: buffer.baseAddress!)
             output.append(string)
+        } while receivedCount < lengthOfData
+        
+        
+    }
+    
+    func receive(_ completionHandler:(Data) -> ()) throws{
+        var output = Data()
+        
+        let bufferSize = 1024
+        let pointer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+        pointer.initialize(repeating: 0, count: bufferSize)
+        
+        let buffer = UnsafeMutableBufferPointer(start: pointer, count: bufferSize)
+        defer {
+            completionHandler(output)
+            pointer.deinitialize(count: bufferSize)
+            pointer.deallocate()
+        }
+        
+        
+        var receivedBytes = 0
+        var receivedCount = 0
+        let lengthOfData = try receiveLength()
+        
+        repeat {
+            receivedBytes = try socket.receive(buffer: buffer)
+            guard receivedBytes != 0 else {
+                break
+            }
+            receivedCount += receivedBytes
+            let data = Data(buffer: buffer)
+            output.append(data)
         } while receivedCount < lengthOfData
         
         
