@@ -17,6 +17,14 @@
 		8443589B26434A6D009CE861 /* ClientSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8443589A26434A6D009CE861 /* ClientSocket.swift */; };
 		847D8EEF264292740082FFF5 /* SocketAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D8EEE264292740082FFF5 /* SocketAddress.swift */; };
 		848B2838263D9D0A005D1E35 /* AddressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B2837263D9D0A005D1E35 /* AddressInfo.swift */; };
+		84FD09E92657F92F00C85A0A /* BSDSocketWrapperMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 84FD09E72657F92F00C85A0A /* BSDSocketWrapperMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84FD09F02657F95600C85A0A /* BaseSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425999A26415B07005507F4 /* BaseSocket.swift */; };
+		84FD09F12657F95600C85A0A /* ClientSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8443589A26434A6D009CE861 /* ClientSocket.swift */; };
+		84FD09F22657F95600C85A0A /* AddressParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84213E21264087AE00B6FCB2 /* AddressParameters.swift */; };
+		84FD09F32657F95600C85A0A /* SocketAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D8EEE264292740082FFF5 /* SocketAddress.swift */; };
+		84FD09F42657F95600C85A0A /* ServerSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8443589626432E3D009CE861 /* ServerSocket.swift */; };
+		84FD09F52657F95600C85A0A /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84421FD8263C228600822ECA /* Socket.swift */; };
+		84FD09F62657F95600C85A0A /* AddressInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B2837263D9D0A005D1E35 /* AddressInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +51,9 @@
 		8443589A26434A6D009CE861 /* ClientSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientSocket.swift; sourceTree = "<group>"; };
 		847D8EEE264292740082FFF5 /* SocketAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAddress.swift; sourceTree = "<group>"; };
 		848B2837263D9D0A005D1E35 /* AddressInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInfo.swift; sourceTree = "<group>"; };
+		84FD09E52657F92F00C85A0A /* BSDSocketWrapperMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BSDSocketWrapperMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84FD09E72657F92F00C85A0A /* BSDSocketWrapperMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSDSocketWrapperMac.h; sourceTree = "<group>"; };
+		84FD09E82657F92F00C85A0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +72,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84FD09E22657F92F00C85A0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -69,6 +87,7 @@
 			children = (
 				84421FBA263C204000822ECA /* BSDSocketWrapper */,
 				84421FC5263C204100822ECA /* BSDSocketWrapperTests */,
+				84FD09E62657F92F00C85A0A /* BSDSocketWrapperMac */,
 				84421FB9263C204000822ECA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,6 +97,7 @@
 			children = (
 				84421FB8263C204000822ECA /* BSDSocketWrapper.framework */,
 				84421FC1263C204100822ECA /* BSDSocketWrapperTests.xctest */,
+				84FD09E52657F92F00C85A0A /* BSDSocketWrapperMac.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,6 +127,15 @@
 			path = BSDSocketWrapperTests;
 			sourceTree = "<group>";
 		};
+		84FD09E62657F92F00C85A0A /* BSDSocketWrapperMac */ = {
+			isa = PBXGroup;
+			children = (
+				84FD09E72657F92F00C85A0A /* BSDSocketWrapperMac.h */,
+				84FD09E82657F92F00C85A0A /* Info.plist */,
+			);
+			path = BSDSocketWrapperMac;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -115,6 +144,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				84421FC9263C204100822ECA /* BSDSocketWrapper.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FD09E02657F92F00C85A0A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84FD09E92657F92F00C85A0A /* BSDSocketWrapperMac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +194,24 @@
 			productReference = 84421FC1263C204100822ECA /* BSDSocketWrapperTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		84FD09E42657F92F00C85A0A /* BSDSocketWrapperMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84FD09EA2657F92F00C85A0A /* Build configuration list for PBXNativeTarget "BSDSocketWrapperMac" */;
+			buildPhases = (
+				84FD09E02657F92F00C85A0A /* Headers */,
+				84FD09E12657F92F00C85A0A /* Sources */,
+				84FD09E22657F92F00C85A0A /* Frameworks */,
+				84FD09E32657F92F00C85A0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BSDSocketWrapperMac;
+			productName = BSDSocketWrapperMac;
+			productReference = 84FD09E52657F92F00C85A0A /* BSDSocketWrapperMac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -171,6 +226,9 @@
 						LastSwiftMigration = 1240;
 					};
 					84421FC0263C204100822ECA = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					84FD09E42657F92F00C85A0A = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -190,6 +248,7 @@
 			targets = (
 				84421FB7263C204000822ECA /* BSDSocketWrapper */,
 				84421FC0263C204100822ECA /* BSDSocketWrapperTests */,
+				84FD09E42657F92F00C85A0A /* BSDSocketWrapperMac */,
 			);
 		};
 /* End PBXProject section */
@@ -203,6 +262,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		84421FBF263C204100822ECA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FD09E32657F92F00C85A0A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -231,6 +297,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				84421FC7263C204100822ECA /* BSDSocketWrapperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FD09E12657F92F00C85A0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84FD09F02657F95600C85A0A /* BaseSocket.swift in Sources */,
+				84FD09F32657F95600C85A0A /* SocketAddress.swift in Sources */,
+				84FD09F62657F95600C85A0A /* AddressInfo.swift in Sources */,
+				84FD09F52657F95600C85A0A /* Socket.swift in Sources */,
+				84FD09F22657F95600C85A0A /* AddressParameters.swift in Sources */,
+				84FD09F12657F95600C85A0A /* ClientSocket.swift in Sources */,
+				84FD09F42657F95600C85A0A /* ServerSocket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +378,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -356,6 +437,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -389,6 +471,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.BSDSocketWrapper;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -417,6 +500,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.BSDSocketWrapper;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -460,6 +544,58 @@
 			};
 			name = Release;
 		};
+		84FD09EB2657F92F00C85A0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 383M7JA9BT;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = BSDSocketWrapperMac/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BSDSocketWrapperMac;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		84FD09EC2657F92F00C85A0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 383M7JA9BT;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = BSDSocketWrapperMac/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BSDSocketWrapperMac;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -486,6 +622,15 @@
 			buildConfigurations = (
 				84421FD0263C204100822ECA /* Debug */,
 				84421FD1263C204100822ECA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84FD09EA2657F92F00C85A0A /* Build configuration list for PBXNativeTarget "BSDSocketWrapperMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84FD09EB2657F92F00C85A0A /* Debug */,
+				84FD09EC2657F92F00C85A0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
