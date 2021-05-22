@@ -149,7 +149,7 @@ public extension BaseSocket{
                 break
             }
             receivedCount += receivedBytes
-            let data = Data(buffer: buffer)
+            let data = Data(bytes: buffer.baseAddress!, count: receivedBytes)
             output.append(data)
         } while receivedCount < lengthOfData
         
